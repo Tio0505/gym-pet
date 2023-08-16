@@ -11,7 +11,7 @@ type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-const inputStyles = `w-full rounded-lg bg-primary-300 px-5 py-3 placeholder-white`;
+const inputStyles = `w-full rounded-lg bg-primary-300 px-5 py-3 placeholder-white mb-5`;
 
 const ContactUs = ({ setSelectedPage }: Props) => {
   const {
@@ -70,7 +70,7 @@ const ContactUs = ({ setSelectedPage }: Props) => {
             <form
               target="_blank"
               onSubmit={onHandleSubmit}
-              action="https://formsubmit.co/tio0505@gmail.com"
+              action="https://formsubmit.co/2381729c53cc20411caa7dcdabb0b5c5"
               method="POST"
             >
               <input
@@ -88,9 +88,63 @@ const ContactUs = ({ setSelectedPage }: Props) => {
                   {errors.name.type === "maxLength" && "Max length is 100 char"}
                 </p>
               )}
+              <input
+                className={inputStyles}
+                type="email"
+                placeholder="EMAIL"
+                {...register("email", {
+                  required: true,
+                  pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                })}
+              />
+              {errors.email && (
+                <p className="mt-1 text-primary-500">
+                  {errors.email.type === "required" && "This field is required"}
+                  {errors.email.type === "pattern" && "Invalid email address"}
+                </p>
+              )}
+              <textarea
+                className={inputStyles}
+                rows={4}
+                cols={50}
+                placeholder="MASSAGE"
+                {...register("massage", {
+                  required: true,
+                  maxLength: 2000,
+                })}
+              />
+              {errors.massage && (
+                <p className="mt-1 text-primary-500">
+                  {errors.massage.type === "required" &&
+                    "This field is required"}
+                  {errors.massage.type === "maxLength" &&
+                    "Max length is 2000 char"}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                className="rounded-lg bg-secondary-500 px-20 py-3 transition duration-500 hover:text-white"
+              >
+                SUBMIT
+              </button>
             </form>
           </motion.div>
-          <img src={ContactUsPageGraphic} alt="img" className="pt-20 md:pt-0" />
+          <motion.div
+            className="relative mt-16 basis-2/5 md:mt-0"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            variants={{
+              hidden: { opacity: 0, y: 50 },
+              visible: { opacity: 1, y: 0 },
+            }}
+          >
+            <div className="md:before:content-evolvetext w-full before:absolute before:-bottom-20 before:-right-10 before:z-[-1]">
+              <img src={ContactUsPageGraphic} alt="img" className="w-full" />
+            </div>
+          </motion.div>
         </div>
       </motion.div>
     </section>
